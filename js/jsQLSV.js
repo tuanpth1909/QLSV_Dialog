@@ -32,11 +32,16 @@
 
     //thoat
     cancelStudents();
+
+    //validate form
+    validateStudents();
 });
 
 //Hàm thêm mới hồ sơ sinh vien
 function addStudents() {
     $('#btnSave').click(function () {
+        validateStudents();
+
         //lay gia tri tu cac input
         let name = $('#txtName').val();
         let dob = $('#datBirthDay').val();
@@ -66,6 +71,7 @@ function addStudents() {
 
         alert("Added successfully!");
 
+
         //xoa ban ghi
         deleteStudents();
 
@@ -77,6 +83,7 @@ function addStudents() {
 
         //thoat
         cancelStudents();
+
 
     });
 }
@@ -178,5 +185,53 @@ function cancelStudents() {
         $('#numTel').val("");
         $('#emlEmail').val("");
         $('#form-dialog').dialog('close');
+    });
+}
+
+//Validate
+function validateStudents() {
+    $('#form-dialong').validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            date: {
+                required: true,
+                date: true,
+            },
+            add: {
+                required: true,
+            },
+            tel: {
+                required: true,
+                number: true,
+                maxlength: 11,
+            },
+            email: {
+                required: true,
+                email: true,
+            },
+        },
+        messages: {
+            name: {
+                required: "Vui lòng nhập tên",
+            },
+            date: {
+                required: "Vui lòng chọn ngày",
+                date: "Định dạng phải là ngày",
+            },
+            add: {
+                required: "Vui lòng nhập địa chỉ",
+            },
+            tel: {
+                required: "Vui lòng nhập số điện thoại",
+                number: "Định dang phải là số",
+                maxlength: "Số điện thoại không quá 11 kí tự",
+            },
+            email: {
+                required: "Vui lòng nhập email",
+                email: "Định dạng phải là email",
+            },
+        }
     });
 }
