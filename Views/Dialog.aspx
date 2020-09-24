@@ -1,9 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/HomeMaster.Master" AutoEventWireup="true" CodeBehind="QuanLiSinhVien.aspx.cs" Inherits="QLSV_Dialog.Views.QLSV" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/HomeMaster.Master" AutoEventWireup="true" CodeBehind="Dialog.aspx.cs" Inherits="QLSV_Dialog.Views.Dialog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../css/myStyle.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="form-dialog" class="bg-dark">
         <form action="/" method="post" id="form-dialong">
@@ -81,50 +79,5 @@
                 <button type="button" name="btnSave" id="btnCancel" class="btn btn-secondary w-25 text-center">Cancel</button>
             </fieldset>
         </form>
-    </div>
-    <h2 class="text-center bg-info text-light p-2 rounded">LIST OF STUDENTS</h2>
-    <div class="container-fluid mt-5">
-        <div class="mt-4 mb-3 row">
-            <div class="col-4">
-                <button type="button" name="open" id="openDialog" class="btn btn-primary">Add</button>
-                <%--<asp:Button Text="Thêm" runat="server" CssClass="btn btn-primary"/>--%>
-            </div>
-            <div class="col-8">
-                <input type="search" name="name" id="search" class="float-right form-control w-50" value="" placeholder="Search..." />
-            </div>
-
-        </div>
-        <table class="table table-bordered text-center">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Sex</th>
-                    <th>Address</th>
-                    <th>Tel</th>
-                    <th>Email</th>
-                    <th>Personal biography</th>
-                    <th>Favorite sport</th>
-                    <th>Class</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Code</td>
-                    <td>2020-09-22</td>
-                    <td>Male</td>
-                    <td>Ha Noi</td>
-                    <td>0982513015</td>
-                    <td>code@gmail.com</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Portenta haec esse dicit, neque ea ratione ullo modo posse vivi</td>
-                    <td>Soccer,Basketball</td>
-                    <td>T1909M</td>
-                    <td>
-                        <button type="button" name="btnEdit" class="btn btn-warning ">Edit</button>
-                        <button type="button" name="btnDelete" class="btn btn-danger">Delete</button></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </asp:Content>

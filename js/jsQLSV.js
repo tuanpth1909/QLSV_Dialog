@@ -1,22 +1,44 @@
 ﻿$(document).ready(function () {
-    $('#form-dialog').dialog({
-        autoOpen: false,
-        height: 550,
-        width: 500,
-        modal: true,
-        show: {
-            effect: 'scale',
-            duration: 250,
-        },
-        hide: {
-            effect: 'drop',
-            duration: 200,
-        }
-    });
 
-    $('#openDialog').click(function () {
-        $('#form-dialog').dialog('open');
-    });
+    //$.post("/Views/Dialog.aspx", function (data) {
+    //    $("#jdialog").html(data);
+    //    $("#jdialog").dialog();
+    //    $('#opendialog').click(function () {
+    //        $('#jdialog').dialog('open');
+    //        //addstudents();
+    //    });
+    //});
+    //$('#jdialog').dialog({
+    //    autoOpen: false,
+    //    height: 900,
+    //    width: 700,
+    //    modal: true,
+    //    show: {
+    //        effect: 'scale',
+    //        duration: 250,
+    //    },
+    //    hide: {
+    //        ef    fect: 'drop',
+    //        duration: 200,
+    //    }
+    //});
+
+    //$('#opendialog').click(function () {
+    //    $('#form-dialog').dialog('../dialong.aspx', function () {
+    //        $('#form-dialog').dialog('open');
+    //    });
+    //});
+
+    //$.post("/Views/Dialog.aspx", {}, function (data) {
+    //    $("#jdialog").html(data);
+    //    $("#jdialog").dialog();
+    //});
+
+
+    //$('#opendialog').click(function () {
+    //    $('#jdialog').dialog('open');
+    //    //addstudents();
+    //});
 
     //Them moi sinh vien
     addStudents();
@@ -39,8 +61,9 @@
 
 //Hàm thêm mới hồ sơ sinh vien
 function addStudents() {
+
     $('#btnSave').click(function () {
-        validateStudents();
+        //validateStudents();
 
         //lay gia tri tu cac input
         let name = $('#txtName').val();
@@ -49,6 +72,12 @@ function addStudents() {
         let add = $('#txtAddress').val();
         let tel = $('#numTel').val();
         let email = $('#emlEmail').val();
+        let personal = $('#txtPersonal').val();
+        let selectedSport = [];
+        $('input[name=sport]:checked').each(function () {
+            selectedSport.push(this.value);
+        });
+        let classes = $("#classes option:selected").val();
 
         //chen du lieu vao table
         $('tbody').prepend("<tr>" +
@@ -58,6 +87,9 @@ function addStudents() {
             "<td>" + add + "</td>" +
             "<td>" + tel + "</td>" +
             "<td>" + email + "</td>" +
+            "<td>" + personal + "</td>" +
+            "<td>" + selectedSport + "</td>" +
+            "<td>" + classes + "</td>" +
             "<td><button type='button' name='btnEdit' class='btn btn-warning mr-1'>Edit</button><button type='button' name='btnDelete' class='btn btn-danger'>Delete</button></td>" +
             "</tr>");
 
@@ -66,11 +98,12 @@ function addStudents() {
         $('#txtAddress').val("");
         $('#numTel').val("");
         $('#emlEmail').val("");
+        $('#txtPersonal').val("");
+        $("input[name=sport]").prop("checked", false);
+        $('#classes').val($("#classes option:first").val());
 
-        $('#form-dialog').dialog('close');
 
         alert("Added successfully!");
-
 
         //xoa ban ghi
         deleteStudents();
@@ -86,6 +119,7 @@ function addStudents() {
 
 
     });
+
 }
 
 //Hàm xóa hồ sơ sinh viên
@@ -113,7 +147,7 @@ function editStudents() {
     //bat su kien khi nhap chuot vao Edit
     $('button[name=btnEdit]').click(function () {
 
-        $('#form-dialog').dialog('open');
+        //$('#form-dialog').dialog('open');
 
         trEdit = $(this).closest('tr');
         $('#btnSave').hide();
@@ -125,14 +159,26 @@ function editStudents() {
         let add = $(trEdit).find('td:eq(3)').text();
         let tel = $(trEdit).find('td:eq(4)').text();
         let email = $(trEdit).find('td:eq(5)').text();
+        let personal = $(trEdit).find('td:eq(6)').text();
+        let selectedSport = $(trEdit).find('td:eq(7)').text();
+        let classes = $(trEdit).find('td:eq(8)').text();
+
+        //alert(selectedSport);
+        //alert(classes);
+        var lstSelectedSport = selectedSport.split(",");
 
         $('#txtName').val(name);
         $('#datBirthDay').val(dob);
-        //$('input[name=sex]:checked').val(sex);
         $('input[name=sex][value=' + sex + ']').prop("checked", true);
         $('#txtAddress').val(add);
         $('#numTel').val(tel);
         $('#emlEmail').val(email);
+        $('#txtPersonal').val(personal);
+        for (var item in lstSelectedSport) {
+            $('input[   name=sport][value=' + lstSelectedSport[item] + ']').prop("checked", true);
+        }
+
+        $("#classes").val(classes); 
 
 
     });
@@ -147,6 +193,12 @@ function editStudents() {
             let add = $('#txtAddress').val();
             let tel = $('#numTel').val();
             let email = $('#emlEmail').val();
+            let personal = $('#txtPersonal').val();
+            let selectedSport = [];
+            $('input[name=sport]:checked').each(function () {
+                selectedSport.push(this.value);
+            });
+            let classes = $("#classes option:selected").val();
 
             //thay the du lieu cu sau khi chinh sua
             $(trEdit).find('td:eq(0)').text(name);
@@ -155,6 +207,9 @@ function editStudents() {
             $(trEdit).find('td:eq(3)').text(add);
             $(trEdit).find('td:eq(4)').text(tel);
             $(trEdit).find('td:eq(5)').text(email);
+            $(trEdit).find('td:eq(6)').text(personal);
+            $(trEdit).find('td:eq(7)').text(selectedSport);
+            $(trEdit).find('td:eq(8)').text(classes);
 
             trEdit = null;
 
@@ -163,6 +218,9 @@ function editStudents() {
             $('#txtAddress').val("");
             $('#numTel').val("");
             $('#emlEmail').val("");
+            $('#txtPersonal').val("");
+            $("input[name=sport]").prop("checked", false);
+            $('#classes').val($("#classes option:first").val());
 
             $('#btnSave').show();
             $('#btnUpdate').hide();

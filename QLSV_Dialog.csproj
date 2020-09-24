@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="css\myStyle.css" />
     <Content Include="js\jsQLSV.js" />
+    <Content Include="Views\Dialog.aspx" />
     <Content Include="Views\QuanLiSinhVien.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -81,6 +82,13 @@
       <DependentUpon>HomeMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Dialog.aspx.cs">
+      <DependentUpon>Dialog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Dialog.aspx.designer.cs">
+      <DependentUpon>Dialog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\QuanLiSinhVien.aspx.cs">
       <DependentUpon>QuanLiSinhVien.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
